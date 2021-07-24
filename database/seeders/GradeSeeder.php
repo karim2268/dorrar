@@ -18,8 +18,8 @@ class GradeSeeder extends Seeder
         DB::table('grades')->delete();
         $grades = [
             ['en'=> 'Primary stage', 'ar'=> 'المرحلة الابتدائية'],
-            ['en'=> 'middle School', 'ar'=> 'المرحلة الاعدادية'],
-            ['en'=> 'High school', 'ar'=> 'المرحلة الثانوية'],
+            ['en'=> 'ِClubs', 'ar'=> ' النوادى'],
+            ['en'=> 'KG2', 'ar'=> 'المرحلة التحضيرية'],
         ];
 
         foreach ($grades as $grade) {
