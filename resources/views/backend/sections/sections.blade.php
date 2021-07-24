@@ -203,14 +203,20 @@
                                                                                             @endif
                                                                                             <label
                                                                                                 class="form-check-label"
-                                                                                                for="exampleCheck1">{{ trans('Sections_trans.Status') }}</label>
+                                                                                                for="exampleCheck1">{{ trans('Sections_trans.Status') }}</label><br>
 
+                                                                                                <div class="col">
+                                                                                                    <label for="inputName" class="control-label">{{ trans('Sections_trans.Name_Teacher') }}</label>
+                                                                                                    <select multiple name="teacher_id[]" class="form-control" id="exampleFormControlSelect2">
+                                                                                                        @foreach($list_Sections->teachers as $teacher)
+                                                                                                            <option selected value="{{$teacher['id']}}">{{$teacher['Name']}}</option>
+                                                                                                        @endforeach
 
-                                                                                                
-
-
-                                                                                                
-
+                                                                                                        @foreach($teachers as $teacher)
+                                                                                                            <option value="{{$teacher->id}}">{{$teacher->Name}}</option>
+                                                                                                        @endforeach
+                                                                                                    </select>
+                                                                                                </div>
                                                                                         </div>
                                                                                     </div>
 
@@ -307,7 +313,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form action="{{route('Sections.store')}}" method="POST">
+                                <form action="{{ route('Sections.store') }}" method="POST">
                                     {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col">
@@ -336,7 +342,6 @@
                                             @foreach ($list_Grades as $list_Grade)
                                                 <option value="{{ $list_Grade->id }}"> {{ $list_Grade->Name }}
                                                 </option>
-                                                
                                             @endforeach
                                         </select>
                                     </div>
@@ -346,8 +351,16 @@
                                         <label for="inputName"
                                                class="control-label">{{ trans('Sections_trans.Name_Class') }}</label>
                                         <select name="Class_id" class="custom-select">
-                                          
 
+                                        </select>
+                                    </div><br>
+
+                                    <div class="col">
+                                        <label for="inputName" class="control-label">{{ trans('Sections_trans.Name_Teacher') }}</label>
+                                        <select multiple name="teacher_id[]" class="form-control" id="exampleFormControlSelect2">
+                                            @foreach($teachers as $teacher)
+                                                <option value="{{$teacher->id}}">{{$teacher->Name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -368,31 +381,31 @@
         </div>
     </div>
     <!-- row closed -->
-@endsection
-@section('js')
-@toastr_js
-@toastr_render
-<script>
-    $(document).ready(function () {
-        $('select[name="Grade_id"]').on('change', function () {
-            var Grade_id = $(this).val();
-            if (Grade_id) {
-                $.ajax({
-                    url: "{{ URL::to('classes') }}/" + Grade_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        $('select[name="Class_id"]').empty();
-                        $.each(data, function (key, value) {
-                            $('select[name="Class_id"]').append('<option value="' + key + '">' + value + '</option>');
+    @endsection
+    @section('js')
+        @toastr_js
+        @toastr_render
+        <script>
+            $(document).ready(function () {
+                $('select[name="Grade_id"]').on('change', function () {
+                    var Grade_id = $(this).val();
+                    if (Grade_id) {
+                        $.ajax({
+                            url: "{{ URL::to('classes') }}/" + Grade_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function (data) {
+                                $('select[name="Class_id"]').empty();
+                                $.each(data, function (key, value) {
+                                    $('select[name="Class_id"]').append('<option value="' + key + '">' + value + '</option>');
+                                });
+                            },
                         });
-                    },
+                    } else {
+                        console.log('AJAX load did not work');
+                    }
                 });
-            } else {
-                console.log('AJAX load did not work');
-            }
-        });
-    });
+            });
+        </script>
 
-</script>
 @endsection
