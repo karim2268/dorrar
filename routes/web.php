@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\ClassroomController;
 use App\Http\Controllers\Backend\MyClassesController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\TeacherController;
+use App\Http\Controllers\Backend\Students\StudentController2;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,6 +97,24 @@ Route::view('list_parent','livewire.show_Form');
 Route::group(['namespace' => ''], function () {
     Route::resource('Teachers', TeacherController::class);
 });
+
+//=====================Student==============
+
+
+Route::group(['namespace' => ''], function () {
+    Route::resource('Students', StudentController2::class);
+
+    Route::get('/Get_classrooms/{id}', [SectionController::class ,' Get_classrooms']);
+    Route::get('/Get_Sections/{id}', 'StudentController@Get_Sections');
+
+   
+
+
+});
+
+
+
+
 
 
 

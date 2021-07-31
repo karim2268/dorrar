@@ -88,8 +88,19 @@
                             <li> <a href="{{route('Teachers.index')}}">{{trans('main_trans.List_Teachers')}}</a> </li>
                         </ul>
                     </li>
+                    <!--Student -->
 
                     
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#students-menu"><i class="fas fa-user-graduate"></i>{{trans('main_trans.students')}}<div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div></a>
+                        <ul id="students-menu" class="collapse">
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#Student_information">{{trans('main_trans.information_student')}}<div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div></a>
+                                <ul id="Student_information" class="collapse">
+                                    <li> <a href="{{route('Students.create')}}">{{trans('main_trans.add_student')}}</a></li>
+                                    <li> <a href="{{route('Students.index')}}">{{trans('main_trans.list_students')}}</a></li>
+                                </ul>
+                            </li>
                    
                     
                     
